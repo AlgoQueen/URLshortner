@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>URL Shortner</title>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <form action="/shorten" method="post">
+            <label for="long_url">Enter a long URL:</label>
+            <input type="url" id="long_url" name="long_url" required>
+            <button type="submit">Shorten URL</button>
+        </form>
+        {% if short_url %}
+        <p>Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
+        {% endif %}
+        <h2>All Shortened URLs</h2>
+        
+        {% if url_db %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Original URL</th>
+                    <th>Shortened URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for short_url, long_url in url_db.items() %}
+                <tr>
+                    <td>{{ long_url }}</td>
+                    <td><a href="{{ short_url }}">{{ short_url }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No shortened URLs available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
