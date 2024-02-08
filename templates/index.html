@@ -9,17 +9,24 @@
 <body>
     <div class="container">
         <h1>URL Shortener</h1>
-        <form action="/shorten" method="post">
+        <form action="/" method="post">
             <label for="long_url">Enter a long URL:</label>
             <input type="url" id="long_url" name="long_url" required>
+            <label for="short_url">Enter a short name:</label>
+            <input type="text" id="suggested_name" name="suggested_name" required>
             <button type="submit">Shorten URL</button>
         </form>
-        {% if short_url %}
+        
+        <form action="/show" method="get">
+            <button type="submit">Show All Data</button>
+        </form>
+
+        <!-- {% if short_url %}
         <p>Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
         {% endif %}
-        <h2>All Shortened URLs</h2>
+        <h2>All Shortened URLs</h2> -->
         
-        {% if url_db %}
+        <!-- {% if url_db %}
         <table border="1">
             <thead>
                 <tr>
@@ -38,7 +45,7 @@
         </table>
         {% else %}
         <p>No shortened URLs available.</p>
-        {% endif %}
+        {% endif %} -->
     </div>
 </body>
 </html>
