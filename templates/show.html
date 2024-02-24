@@ -2,11 +2,16 @@
 <html>
 
 <head>
+    <script src="https://kit.fontawesome.com/dfaa36d400.js" crossorigin="anonymous"></script>
     <title>Show All Data</title>
     <style>
+        body {
+            margin-left: 10;
+         background-image: url('/static/bg.webp');
+}
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 500px;
         }
 
         th,
@@ -17,33 +22,59 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #8e4444;
+        }
+
+        .container {
+            justify-content: space-between;
+            background: rgba(213, 198, 198, 0.9);
+            width: 72%;
+            padding: 10px 1%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            overflow-x: auto;
+            /* Center the container */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            color: #2e0404;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <h1>All Data Entered</h1>
-    {% if links %}
-    <table>
-        <thead>
-            <tr>
-                <th>Short URL</th>
-                <th>Long URL</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for link in links %}
-            <tr>
-                <td>{{ link.short }}</td>
-                <td>{{ link.long }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>No records available.</p>
-    {% endif %}
+    <h1>All Records</h1>
+    <a href="/">
+        <i class="fa-solid fa-house" style="color: white; font-size: 50px;"></i>
+    </a>
+
+    <div class="container">
+        {% if links %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Short URL</th>
+                    <th>Long URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for link in links %}
+                <tr>
+                    <td>{{ link.short }}</td>
+                    <td>{{ link.long }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No records available.</p>
+        {% endif %}
+    </div>
 </body>
 
 </html>

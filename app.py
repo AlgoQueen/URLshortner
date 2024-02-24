@@ -1,30 +1,14 @@
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request, redirect
 from models import db, User
-#import shortuuid
-app = Flask(__name__) #to make the application run on the server
+# import shortuuid
+# to make the application run on the server
+app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///link.db'
 db.init_app(app)
-#url_database = {}
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-#     if request.method == 'POST':
-#         suggested_name = request.form['suggested_name']
-#         long_url = request.form['long_url']
-#         if suggested_name and long_url:
-#             # Check if the name already exists
-#             existing_user = User.query.filter_by(short=suggested_name).first()
-#             if existing_user:
-#                 return 'Error: Name already exists. Please enter a different name.'
-#             else:
-#                 new_user = User(short=suggested_name, long=long_url)
-#                 db.session.add(new_user)
-#                 db.session.commit()
-#                 short_url = request.host_url + suggested_name
-#                 #return 'Thank you for submitting your information!'
-#         else:
-#             return 'Please enter both your name and place.'
     return render_template('index.html')
 
 
@@ -36,7 +20,8 @@ def shorten_url():
     # Check if the suggested short URL already exists
     existing_mapping = User.query.filter_by(short=suggested_name).first()
     if existing_mapping:
-        return f'The suggested short URL "{suggested_name}" already exists. Please choose a different suggestion.'
+        Error=f'The suggested short URL "{suggested_name}" already exists. Please choose a different suggestion.'
+        return render_template('index.html', error=Error)
 
     # Store the mapping in the database
     url_mapping = User(short=suggested_name, long=long_url)
@@ -44,7 +29,8 @@ def shorten_url():
     db.session.commit()
 
     short_url = request.host_url + suggested_name
-    return f'Short URL: <a href="{short_url}">{short_url}</a>'
+    return render_template('index.html', short_url=short_url)
+
 
 @app.route('/show')
 def show_data():
@@ -58,7 +44,7 @@ def redirect_to_long_url(short_url):
     if user:
         return redirect(user.long)
     else:
-        return "Short URL not found", 404
+        return render_template('error.html')
 
 
 if __name__ == '__main__':

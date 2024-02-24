@@ -3,53 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>URL Shortner</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='style.css') }}"> 
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dfaa36d400.js" crossorigin="anonymous"></script>
+    <title> URL Shortner</title>
 </head>
 <body>
     <div class="container">
         <h1>URL Shortener</h1>
         <form action="/shorten" method="post">
-            <label for="long_url">Enter a long URL:</label>
-            <input type="url" id="long_url" name="long_url" required>
-            <label for="short_url">Enter a short name:</label>
-            <input type="text" id="suggested_name" name="suggested_name" required>
+            <div class="form-group">
+                <label for="long_url">Enter a long URL:</label>
+                <input type="url" id="long_url" name="long_url" placeholder="Drop Your URL" required>
+            </div>
+            <div class="form-group">
+                <label for="short_url">Enter a short name:</label>
+                <input type="text" id="suggested_name" name="suggested_name" placeholder="Suggest A Name" required class="short-input">
+                {% if error %}
+                <p class="error">{{ error }}</p>
+                {% endif %}
+            </div>
             <button type="submit">Shorten URL</button>
         </form>
         
-        <form action="/show" method="get">
+        <form action="/show" method="get" style="text-align: right;">
+            <div style="display: inline-block;">
             <button type="submit">Show All Data</button>
+            </div>
         </form>
 
         {% if short_url %}
-        <p>Your short URL is: <a href="{{ short_url }}">{{ short_url }}</a></p>
+        <label for="short_url">Short URL:</label><br>
+        <input type="text" id="short_url" name="short_url" value="{{ short_url }}">
+        <button onclick="copyShortUrl()"><i class="fa-solid fa-link"></i></button>
         {% endif %}
 
-        <!-- {% if short_url %}
-        <p>Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
-        {% endif %}
-        <h2>All Shortened URLs</h2> -->
-        
-        <!-- {% if url_db %}
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Original URL</th>
-                    <th>Shortened URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for short_url, long_url in url_db.items() %}
-                <tr>
-                    <td>{{ long_url }}</td>
-                    <td><a href="{{ short_url }}">{{ short_url }}</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No shortened URLs available.</p>
-        {% endif %} -->
     </div>
+    <script src="script.js"></script>
+    <script>
+        function copyShortUrl() {
+            var copyText = document.getElementById("short_url");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            alert("Copied the URL: " + copyText.value);
+        }
+    </script>
 </body>
 </html>
