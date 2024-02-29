@@ -35,7 +35,8 @@ def shorten_url():
 @app.route('/show')
 def show_data():
     links = User.query.all()
-    return render_template('show.html', links=links)
+    hosturl = request.url_root.rstrip('/')
+    return render_template('show.html', links=links,hosturl=hosturl)
 
 
 @app.route('/<short_url>')

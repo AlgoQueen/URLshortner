@@ -65,7 +65,7 @@
             <tbody>
                 {% for link in links %}
                 <tr>
-                    <td>{{ link.short }}</td>
+                    <td><a href="{{ hosturl }}/{{ link.short }}" target="_blank">{{ hosturl }}/{{ link.short }}</a></td>
                     <td>{{ link.long }}</td>
                 </tr>
                 {% endfor %}
