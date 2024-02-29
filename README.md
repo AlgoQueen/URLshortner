@@ -23,10 +23,13 @@ To run this project locally, follow these steps:
    ```bash
    git clone https://github.com/AlgoQueen/URLshortner.git
 2. Navigate to the project directory:
+    ```bash
     cd URLshortner
 3. Install the required dependencies using pip:
+    ```bash
     pip install -r requirements.txt
 4. Start the Flask application:
+    ```bash
     python app.py
 5. Open a web browser and navigate to http://localhost:5000.
 
@@ -41,7 +44,7 @@ To run this project locally, follow these steps:
 - This project is licensed under the MIT License.
   
 ## Hosted Link
--The project is hosted at https://urlshortner-p9ea.onrender.com/.
+- The project is hosted at https://urlshortner-p9ea.onrender.com/.
 
 ## Credits
--Created by AlgoQueen
+- Created by AlgoQueen
