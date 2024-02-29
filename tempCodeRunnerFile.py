@@ -1,1 +1,0 @@
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://link_7zsx_user:0m94lcB9NQaH20vlrNXKcE4VU5qJghq6@dpg-cncll46n7f5s73bhel3g-a:5432/link_7zsx'
