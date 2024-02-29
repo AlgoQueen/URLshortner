@@ -4,9 +4,8 @@ from models import db, User
 # to make the application run on the server
 app = Flask(__name__, static_url_path='/static')
 # Configure PostgreSQL database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://link_7zsx_user:password@dpg-cncll46n7f5s73bhel3g-a:5432/link_7zsx'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app = Flask(__name__, static_url_path='/static')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///link.db'
 db.init_app(app)
 
 
