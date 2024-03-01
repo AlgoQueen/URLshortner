@@ -117,4 +117,93 @@ button:hover {
   background-color: var(--hover-color);
 }
 
-/* Additional styles for layout and typography can be added below */
+.data-table {
+  width: 80%;
+  /* Set table width to 100% */
+  border-collapse: collapse;
+  /* Collapse table borders */
+}
+
+.data-table th,
+.data-table td {
+  /* Add borders to table cells */
+  padding: 8px;
+  /* Add padding to table cells */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.qr-code-container img {
+  max-width: 100px;
+  /* Set max width for QR code images */
+  max-height: 100px;
+  /* Set max height for QR code images */
+  display: inline-block;
+  /* Make images block elements */
+  margin: 0 auto;
+  /* Center align images */
+}
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .container {
+    width: 90%;
+    /* Make the container wider on small screens for better use of space */
+    padding: 20px;
+    /* Increase padding for better touch interaction */
+  }
+
+  .container h1 {
+    font-size: 36px;
+    /* Reduce font size for smaller screens */
+    margin-bottom: 15px;
+    /* Adjust spacing */
+  }
+
+  .form-group,
+  form input,
+  .short-input,
+  .short-url-container {
+    width: 100%;
+    /* Make form elements take full width */
+  }
+
+
+  .short-url-container {
+    flex-direction: column;
+    /* Stack elements vertically */
+    align-items: stretch;
+    /* Stretch items to fill the width */
+  }
+
+  .data-table {
+    width: 100%;
+    /* Allow the table to expand to the full width */
+  }
+
+  .qr-code-container img {
+    max-width: 80px;
+    /* Slightly reduce QR code size for mobile */
+    max-height: 80px;
+  }
+
+  /* Adjust font sizes for readability on smaller screens */
+  .form-group label {
+    font-size: 18px;
+    /* Adjust label font size */
+  }
+
+  input[type="text"],
+  input[type="url"],
+  button {
+    font-size: 16px;
+    /* Increase font size for better readability */
+    padding: 12px;
+    /* Increase padding for easier interaction */
+  }
+}
