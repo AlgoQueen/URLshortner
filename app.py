@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from models import db, User
+import qrcode
+from io import BytesIO
+import base64
 # import shortuuid
 # to make the application run on the server
 app = Flask(__name__, static_url_path='/static')
@@ -29,7 +32,22 @@ def shorten_url():
     db.session.commit()
 
     short_url = request.host_url + suggested_name
-    return render_template('index.html', short_url=short_url)
+
+    # Generate the QR code for the short URL
+    qr = qrcode.QRCode(
+        version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=4, border=1)
+    qr.add_data(short_url)
+    qr.make(fit=True)
+
+    # Create an in-memory bytes buffer to save the QR code image
+    qr_code_img = BytesIO()
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save(qr_code_img)
+    qr_code_img.seek(0)
+    qr_code_base64 = base64.b64encode(qr_code_img.getvalue()).decode('utf-8')
+
+    # Pass the short URL and QR code to the template for rendering
+    return render_template('index.html', short_url=short_url, qr_code=qr_code_base64)
 
 
 @app.route('/show')
