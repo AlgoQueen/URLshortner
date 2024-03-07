@@ -3,6 +3,7 @@ from models import db, User
 import qrcode
 from io import BytesIO
 import base64
+import shortuuid
 # import shortuuid
 # to make the application run on the server
 app = Flask(__name__, static_url_path='/static')
@@ -18,8 +19,11 @@ def index():
 @app.route('/shorten', methods=['POST'])
 def shorten_url():
     long_url = request.form['long_url']
-    suggested_name = request.form['suggested_name']
-
+    forminput = request.form['suggested_name'].strip()
+    if not forminput:
+        suggested_name = generate_short_url()
+    else:
+        suggested_name = forminput
     # Check if the suggested short URL already exists
     existing_mapping = User.query.filter_by(short=suggested_name).first()
     if existing_mapping:
@@ -64,6 +68,10 @@ def redirect_to_long_url(short_url):
         return redirect(user.long)
     else:
         return render_template('error.html')
+
+
+def generate_short_url():
+    return shortuuid.ShortUUID().random(length=6)
 
 
 if __name__ == '__main__':
